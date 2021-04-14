@@ -23,10 +23,7 @@ module.exports = {
 		if(args[0]){
 			let userMention = client.getUserFromMention(args[0]);
 			if(!userMention){
-				return {
-					'err_title': 'Ops! usuário invalido!',
-					'err_msg': 'Digite o comando corretamente: {usage}',
-				}
+				return 'argsError';
 			}
 			textRet += "**"+message.author.username+"** mandou uma cantada para **"+userMention.username+"**";
 		}else{

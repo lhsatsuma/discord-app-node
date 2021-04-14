@@ -90,6 +90,7 @@ class discordAppClient extends Client
 					var argsArr = this.getArrArgs(message.content.substring(global.bot_prefix.length, 9999999));
 					
 					if(this.commands.has(argsArr.command)){
+						argsArr.args.shift();
 						this.log.Debug('['+message.channel.guild.id+']COMMAND: '+message.content);
 						
 						let command = this.commands.get(argsArr.command);
@@ -98,11 +99,15 @@ class discordAppClient extends Client
 						let commandFire = command;
 						
 						//Checking if have subCommands
-						if(argsArr.subCommand && typeof command.subCommands[argsArr.subCommand] !== 'undefined'){
-							let subCommand = command.subCommands[argsArr.subCommand];
-							commandFire = subCommand;
-						}else{
+						if(argsArr.subCommand && !!commandFire.subCommands && typeof commandFire.subCommands[argsArr.subCommand] !== 'undefined'){
 							argsArr.args.shift();
+							let subCommand = commandFire.subCommands[argsArr.subCommand];
+							commandFire = subCommand;
+							if(!!argsArr.subSubCommand && !!commandFire.subCommands && typeof commandFire.subCommands[argsArr.subSubCommand] !== 'undefined'){
+								argsArr.args.shift();
+								let subSubCommand = commandFire.subCommands[argsArr.subSubCommand];
+								commandFire = subSubCommand;
+							}
 						}
 						let itsValidCooldown = true;
 						if(!!commandFire.cooldown){
@@ -211,11 +216,12 @@ class discordAppClient extends Client
 		/*
 		POSSIBLES RETURNS VALIDS:
 		-> {
-			err_title: 'test',
-			err_msg: 'tested',
+			err: 'test',
+			msg: 'tested',
 		}
 		
 		-> new Discord.MessageEmbed()
+		-> (string) argsError (for generic args error passed)
 		-> string
 		-> {
 			text: 'test',
@@ -227,21 +233,27 @@ class discordAppClient extends Client
 			'option': null
 		};
 		let isError = false;
-		if(typeof result == 'object'){
+		if(typeof result == 'object'|| (typeof result == 'string' && result == 'argsError')){
 			if(result.constructor.name == 'MessageEmbed'){
 				sendInfo.option = result;
 			}else{
-				if(typeof result.err_title == 'undefined'){
+				if(typeof result.err == 'undefined'
+				&& (typeof result !== 'string' && result !== 'argsError')){
 					sendInfo.text = result.text;
 					sendInfo.option = result.option;
 					sendInfo.timeout = result.timeout;
 				}else{
-					result.err_msg = result.err_msg.replace('{usage}', '``'+command.usage()+'``');
+					if(typeof result == 'string' && result == 'argsError'){
+						result = {};
+						result.err = 'Ops! Comando inválido!';
+						result.msg = 'Digite o comando corretamente: {usage}';
+					}
+					result.msg = result.msg.replace('{usage}', '``'+command.usage()+'``');
 					sendInfo.text = '<@!'+message.author.id+'>';
 					sendInfo.option = new Discord.MessageEmbed()
 					.setAuthor(bot_cfg.discordOptions.name, message.channel.guild.iconURL(), '')
-					.setTitle(result.err_title)
-					.setDescription(result.err_msg);
+					.setTitle(result.err)
+					.setDescription(result.msg);
 					isError = true;
 				}
 			}
@@ -300,12 +312,12 @@ class discordAppClient extends Client
 		for (const commandName of commandPaths) {
 			let commandPath = basePath+commandName+'/';
 			
-			let commandFile = commandPath+'command.js';
+			let commandFile = commandPath+commandName+'.js';
 			
 			if(this.fs.existsSync(commandFile)){
 			
 				this.log.Debug('Loading command: '+commandName);
-				const command = requireAgain(relPath+commandName+'/command.js');
+				const command = requireAgain(relPath+commandName+'/'+commandName+'.js');
 				
 				if(this.commands.has(command.name)){
 					this.commands.delete(command.name);
@@ -332,7 +344,7 @@ class discordAppClient extends Client
 				this.log.Debug('Loaded command: '+commandName);
 			}else{
 				
-				this.log.Error('Command: '+commandName+' dont have command.js');
+				this.log.Error('Command: '+commandName+' dont have JS');
 			}
 		}
 	}
@@ -342,8 +354,8 @@ class discordAppClient extends Client
 		let returnTo = {
 			command: null,
 			subCommand: null,
+			subSubCommand: null,
 			args: [],
-			
 		};
 		let result = '';
 		let openQuote = false;
@@ -378,6 +390,10 @@ class discordAppClient extends Client
 			if(returnShell.length > 0){
 				//Still have args left, let's try to subCommand
 				returnTo.subCommand = returnShell.shift().toLowerCase();
+				if(returnShell.length > 0){
+					//Still have args left, let's try to subSubCommand
+					returnTo.subSubCommand = returnShell.shift().toLowerCase();
+				}
 			}
 		}
 		return returnTo;

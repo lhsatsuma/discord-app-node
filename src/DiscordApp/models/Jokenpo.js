@@ -160,8 +160,7 @@ class BeanJokenpo extends BeanBase
 			let lose = 'lose_'+type;
 			let draw = 'draw_'+type;
 			let played_card = 'played_'+type;
-			
-            console.log(win, lose, draw, played_card);
+            
 			if(this[played_card] > 0){
 				this.stats_play[type]['perc']['total'] = parseInt(this[played_card] * 100);
 				this.stats_play[type]['perc']['total'] = parseFloat(this.stats_play[type]['perc']['total'] / this.total_played).toFixed(2);
@@ -175,7 +174,6 @@ class BeanJokenpo extends BeanBase
 				this.stats_play[type]['perc']['total'] = 0;
 			}
 		}
-        console.log(this.stats_play);
 	}
     async resetScore()
 	{

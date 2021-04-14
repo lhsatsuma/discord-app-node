@@ -24,7 +24,7 @@ module.exports = {
 
 		let options = ['pedra', 'papel', 'tesoura'];
 
-		let choose = args[2];
+		let choose = args[0];
 		if(options.indexOf(choose) != -1){
 			let random = Math.floor(Math.random() * options.length);
 			let bot_choose = options[random];
