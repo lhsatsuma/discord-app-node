@@ -77,12 +77,7 @@ class discordAppClient extends Client
 					}else{
 						global.bot_prefix = bot_cfg_guild.prefix;
 					}
-
-
-					if(!!bot_cfg_guild){
-						global.bot_prefix = bot_cfg_guild.prefix;
-					}else{
-					}
+					
 					if(message.content.substring(0, global.bot_prefix.length) !== global.bot_prefix){
 						return;
 					}
@@ -241,7 +236,7 @@ class discordAppClient extends Client
 					sendInfo.option = result.option;
 					sendInfo.timeout = result.timeout;
 				}else{
-					result.err_msg = result.err_msg.replace('{usage}', '``'+command.usage+'``');
+					result.err_msg = result.err_msg.replace('{usage}', '``'+command.usage()+'``');
 					sendInfo.text = '<@!'+message.author.id+'>';
 					sendInfo.option = new Discord.MessageEmbed()
 					.setAuthor(bot_cfg.discordOptions.name, message.channel.guild.iconURL(), '')

@@ -3,7 +3,9 @@ module.exports = {
 	description: 'Pedra, Papel ou Tesoura!',
 	deleteMsgOnSuccess: true,
 	deleteMsgOnError: true,
-	usage: 'jokenpo status',
+	usage: () => {
+		return global.bot_prefix+'jokenpo status';
+	},
 	allowedChannels: [
 		'adminSpam',
 	],

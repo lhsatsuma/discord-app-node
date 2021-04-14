@@ -2,7 +2,9 @@ module.exports = {
 	name: 'ping',
 	description: 'Ping!',
 	deleteMsgAfter: true,
-	usage: global.bot_prefix+'ping',
+	usage: () => {
+		return global.bot_prefix+'ping';
+	},
 	execute(message, args) {
 		
 		return new Discord.MessageEmbed()

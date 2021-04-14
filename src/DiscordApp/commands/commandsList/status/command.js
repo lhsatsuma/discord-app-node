@@ -4,7 +4,9 @@ module.exports = {
 	subCommands: {},
 	deleteMsgOnSuccess: true,
 	deleteMsgOnError: true,
-	usage: global.bot_prefix+'status',
+	usage: () => {
+		return global.bot_prefix+'status';
+	},
 	allowedChannels: [
 		'adminSpam',
 	],

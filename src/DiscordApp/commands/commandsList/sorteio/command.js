@@ -3,7 +3,9 @@ module.exports = {
 	description: 'Sorteio de um número!',
 	deleteMsgOnSuccess: true,
 	deleteMsgOnError: true,
-	usage: global.bot_prefix+'sorteio <numero_min> <numero_max>',
+	usage: () => {
+		return global.bot_prefix+'sorteio <numero_min> <numero_max>';
+	},
 	allowedChannels: [],
 	execute(message, args) {
 		let textRet = '**Sorteio de um número!**';

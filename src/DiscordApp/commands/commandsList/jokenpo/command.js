@@ -8,7 +8,9 @@ module.exports = {
 	},
 	deleteMsgOnSuccess: true,
 	deleteMsgOnError: true,
-	usage: global.bot_prefix+'jokenpo jogar <pedra|papel|tesoura>',
+	usage: () => {
+		return global.bot_prefix+'jokenpo jogar <pedra|papel|tesoura>';
+	},
 	allowedChannels: [
 		'botSpam',
 		'adminSpam',

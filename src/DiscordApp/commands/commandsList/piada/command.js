@@ -3,7 +3,9 @@ module.exports = {
 	description: 'Piadas/Trocadilhos ruins!',
 	deleteMsgOnSuccess: true,
 	deleteMsgOnError: true,
-	usage: global.bot_prefix+'piada',
+	usage: () => {
+		return global.bot_prefix+'piada';
+	},
 	allowedChannels: [
 		'botSpam',
 		'adminSpam',

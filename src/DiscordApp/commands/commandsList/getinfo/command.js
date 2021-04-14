@@ -4,7 +4,9 @@ module.exports = {
 	subCommands: {},
 	deleteMsgOnSuccess: true,
 	deleteMsgOnError: true,
-	usage: global.bot_prefix+'getinfo',
+	usage: () => {
+		return global.bot_prefix+'getinfo';
+	},
 	async execute(message, args) {
 		let embedMsg = new Discord.MessageEmbed()
 		.setColor(getColor('GREEN'))

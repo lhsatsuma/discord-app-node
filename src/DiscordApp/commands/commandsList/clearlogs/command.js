@@ -4,7 +4,9 @@ module.exports = {
 	subCommands: {},
 	deleteMsgOnSuccess: true,
 	deleteMsgOnError: true,
-	usage: global.bot_prefix+'clearlogs',
+	usage: () => {
+		returnglobal.bot_prefix+'clearlogs';
+	},
 	allowedChannels: [
 		'774240024723193856',
 	],

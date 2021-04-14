@@ -4,7 +4,9 @@ module.exports = {
 	subCommands: {},
 	deleteMsgOnSuccess: true,
 	deleteMsgOnError: true,
-	usage: global.bot_prefix+'pidkill',
+	usage: () => {
+		return global.bot_prefix+'pidkill';
+	},
 	allowedChannels: [
 		'774240024723193856',
 	],

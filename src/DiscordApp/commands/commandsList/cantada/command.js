@@ -3,7 +3,9 @@ module.exports = {
 	description: 'Cantadas Engraçadas!',
 	deleteMsgOnSuccess: false,
 	deleteMsgOnError: true,
-	usage: global.bot_prefix+'cantada <usuario>',
+	usage: () => {
+		return global.bot_prefix+'cantada <usuario>';
+	},
 	allowedChannels: [
 		'botSpam',
 		'adminSpam',
