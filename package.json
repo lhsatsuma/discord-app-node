@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "discord.js": "^12.4.1",
+    "mysql": "^2.18.1",
+    "php-serialize": "^4.0.2",
+    "shell-quote": "^1.7.2"
+  }
+}
