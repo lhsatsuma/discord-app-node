@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'server',
+	inactive: true,
 	description: '[ADMIN] Servers Config',
 	subCommands: {
 		'add': requireAgain('./commands/commandsList/server/subs/add/add.js'),

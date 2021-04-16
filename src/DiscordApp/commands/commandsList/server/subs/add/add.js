@@ -2,7 +2,9 @@ module.exports = {
 	name: 'add',
 	description: '[ADMIN] Add New Server to BOT!',
 	subCommands: {
-		'guid': requireAgain('./commands/commandsList/server/subs/add/subs/guid.js')
+		'guid': requireAgain('./commands/commandsList/server/subs/add/subs/guid.js'),
+		'adminchannel': requireAgain('./commands/commandsList/server/subs/add/subs/adminchannel.js'),
+		'spamchannel': requireAgain('./commands/commandsList/server/subs/add/subs/spamchannel.js'),
 	},
 	deleteMsgOnSuccess: false,
 	deleteMsgOnError: false,

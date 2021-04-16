@@ -31,21 +31,18 @@ class BeanBase
 		}
 	}
 	
-	select(where = null)
+	async select(where = null)
 	{
-		return new Promise(async (resolve, reject) => {
-			if(!where){
-				this.dbh.where = "user_id = '"+this.user_id+"'";
-			}else{
-				this.dbh.where = where;
-			}
-
-			let result = await this.dbh.Select();
-			if(typeof result[0] !== 'undefined'){
-				this.mountFieldsObj(result[0]);
-			}
-			resolve(this);
-		});
+		if(!where){
+			this.dbh.where = "user_id = '"+this.user_id+"'";
+		}else{
+			this.dbh.where = where;
+		}
+		let result = await this.dbh.Select();
+		if(typeof result[0] !== 'undefined'){
+			this.mountFieldsObj(result[0]);
+		}
+		return this;
 	}
 	
 	selectActive()

@@ -118,10 +118,9 @@ class BeanJokenpo extends BeanBase
 	{
 		this.total_played = 0;
 		let options = ['pedra', 'papel', 'tesoura'];
-        let thisObj = this;
-		options.forEach(function(option, idx){
+		options.forEach((option, idx) =>{
             let played_card = 'played_'+option;
-			thisObj.total_played += thisObj[played_card];
+			this.total_played += this[played_card];
         });
 	}
 

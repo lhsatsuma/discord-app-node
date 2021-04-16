@@ -318,7 +318,10 @@ class discordAppClient extends Client
 			
 				this.log.Debug('Loading command: '+commandName);
 				const command = requireAgain(relPath+commandName+'/'+commandName+'.js');
-				
+				if(!!command.inactive){
+					this.log.Info('command: '+commandName+' is inactive');
+					continue;
+				}
 				if(this.commands.has(command.name)){
 					this.commands.delete(command.name);
 				}

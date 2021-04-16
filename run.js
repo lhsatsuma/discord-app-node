@@ -15,8 +15,8 @@ global.Discord = require("discord.js");
 client.load_class().then((res) => {
 	if(res == true){
 		client.once('ready', async () => {
-			
 			for(var guild_id in bot_cfg.servers_allow){
+				break;
 				
 				let guild_options = bot_cfg.servers_allow[guild_id];
 				
@@ -30,12 +30,11 @@ client.load_class().then((res) => {
 					.setThumbnail(channel.guild.iconURL())
 					.setDescription("Data: "+dateNow.toLocaleString('pt-BR'));
 
-				// await channel.send(exampleEmbed);
+				await channel.send(exampleEmbed);
 			}
-			
+			client.log.Info('BOT IS UP AND RUNNING!');
 		});
 		client.login(bot_cfg.discordOptions.token);
-		client.log.Info('BOT IS UP AND RUNNING!');
 		
 	}else{
 		client.log.Fatal('Error loading class discordAppClient', 1, 1);

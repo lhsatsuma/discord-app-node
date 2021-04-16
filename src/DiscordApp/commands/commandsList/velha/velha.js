@@ -1,7 +1,9 @@
 module.exports = {
 	name: 'velha',
 	description: 'Jogo da Velha!',
-	subCommands: {},
+	subCommands: {
+		'iniciar': requireAgain('./commands/commandsList/velha/subs/iniciar/iniciar.js')
+	},
 	deleteMsgOnSuccess: true,
 	deleteMsgOnError: true,
 	usage: global.bot_prefix+'velha <iniciar,parar,marcar,mostrar>',
