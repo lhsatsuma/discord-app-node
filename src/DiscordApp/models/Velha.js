@@ -42,7 +42,7 @@ class BeanVelha extends BeanBase
         this.mountDefaultFieldsObj();
         this.reactions_spots = [
             '1⃣',
-            // '2⃣',
+            '2⃣',
             // '3⃣',
             // '4⃣',
             // '5⃣',

@@ -66,7 +66,10 @@ class HelperDataBase
 				for(var field in insert_tables[table]){
 					let val = insert_tables[table][field];
 					columns += c_fields+"\n"+field;
-					values += c_fields+"'"+val+"'\n";
+					if(val !== null){
+						val = "'"+val+"'";
+					}
+					values += c_fields+""+val+"\n";
 					c_fields = ',';	
 				}
 				SQL += columns;
@@ -103,8 +106,10 @@ class HelperDataBase
 				let args = update_tables[table];
 				for(var field in args['fields']){
 					let val = args['fields'][field];
-				
-					columns += c_fields+"\n"+field+" = '"+val+"'";
+					if(val !== null){
+						val = "'"+val+"'";
+					}
+					columns += c_fields+"\n"+field+" = "+val+"";
 					c_fields = ",";
 				}
 				

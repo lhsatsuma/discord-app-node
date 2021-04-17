@@ -25,6 +25,7 @@ module.exports = {
 		bean = new beanVelha();
 		bean.user_id = message.author.id;
 		await bean.selectActive();
+
         let description = '';
 		description += `<@!${message.author.id}> é o ❎
 		${against} é o 🟤
@@ -45,15 +46,15 @@ module.exports = {
 			bean.status = 'running';
 			bean.save();
 			bean.reactions_spots.forEach(async (reaction, idx) =>{
-				await messageSended.react(reaction)
+				await messageSended.react(reaction);
 			});
 			const filter = (reaction, user) => {
 				return true;
 			};
-			messageSended.awaitReactions(filter, { max: 1, errors: ['time'] })
+			messageSended.awaitReactions(filter, {})
 			.then(collected => {
 				const reaction = collected.first();
-				console.log(reaction.emoji.name === '👍');
+				console.log(reaction.emoji.name);
 			});
 			
 		})

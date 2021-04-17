@@ -25,6 +25,7 @@ class BeanBase
 	mountFieldsObj(vals)
 	{
 		for(let field in this.fields){
+			console.log(vals[field]);
 			if(vals[field] !== undefined){
 				this[field] = this.unformatField(this.fields[field]['type'], vals[field]);
 			}
