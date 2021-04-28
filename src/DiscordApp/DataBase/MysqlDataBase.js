@@ -37,13 +37,12 @@ class MysqliDataBase extends DataBase
 		});
 	}
 	
-	CloseConn()
+	async CloseConn()
 	{
 		if(this.connection){
-			this.connection.end((err) => {
-				
-			});
+			await this.connection.end();
 		}
+		return true;
 	}
 	
 	ErrorQuery(sql, err_msg = ''){

@@ -12,9 +12,9 @@ class DataBase
 	TestConnection()
 	{
 		return new Promise((resolve, reject) => {
-			this.Connect().then((return_conn) => {
+			this.Connect().then(async (return_conn) => {
 				if(return_conn.status == false){
-					this.CloseConn();
+					await this.CloseConn();
 					resolve(return_conn);
 				}else{
 					resolve(return_conn);
