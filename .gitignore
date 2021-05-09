@@ -80,3 +80,4 @@ typings/
 *.php
 config.js
 servers.js
+workspace.code-workspace

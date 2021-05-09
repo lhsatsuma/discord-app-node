@@ -21,12 +21,19 @@ class MysqliDataBase extends DataBase
 			try{
 				conn.connect((err) => {
 					if(err){
-						this.last_error = 'Connection Error '+this.origem+': '+err.sqlMessage;
+						this.last_error = 'Connection Error '+this.origem+' DB: '+err.sqlMessage;
 						resolve({status: false, 'err': this.last_error});
 					}else{
 						this.connection = conn;
 						resolve({status: true, 'conn': this.connection});
 						
+					}
+				});
+				conn.on('error', function(err) {
+					if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+						CloseConn();                         // lost due to either server restart, or a
+					} else {                                      // connnection idle timeout (the wait_timeout
+						throw err;                                  // server variable configures this)
 					}
 				});
 			}catch(err){

@@ -13,13 +13,8 @@ class DataBase
 	{
 		return new Promise((resolve, reject) => {
 			this.Connect().then(async (return_conn) => {
-				if(return_conn.status == false){
-					await this.CloseConn();
-					resolve(return_conn);
-				}else{
-					resolve(return_conn);
-				}
-				
+				await this.CloseConn();
+				resolve(return_conn);
 			});
 		});
 	}
