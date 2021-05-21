@@ -33,11 +33,17 @@ client.load_class().then((res) => {
 				await channel.send(exampleEmbed);
 			}
 			client.log.Info('BOT IS UP AND RUNNING!');
+
+			if(parseInt(bot_cfg.heartbeat) > 0){
+				setTimeout(() =>{
+					sendHeartbeat();
+				}, bot_cfg.heartbeat * 1000);
+			}
 		});
+		client.log.Debug('Trying to connect into Discord');
 		client.login(bot_cfg.discordOptions.token);
-		
+		client.log.Debug('Connection estabilished!');
 	}else{
 		client.log.Fatal('Error loading class discordAppClient', 1, 1);
 	}
-	
 });

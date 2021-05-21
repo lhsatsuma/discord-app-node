@@ -76,3 +76,12 @@ global.requireAgain = function(path)
 	delete require.cache[require.resolve(path)]
 	return require(path);
 }
+
+global.sendHeartbeat = () => {
+	if(parseInt(global.bot_cfg.heartbeat) > 0 && !!global.client.log){
+		global.client.log.Info("Sending a heartbeat! I'm still alive!!!");
+		setTimeout(() => {
+			sendHeartbeat();
+		}, global.bot_cfg.heartbeat * 1000);
+	}
+}

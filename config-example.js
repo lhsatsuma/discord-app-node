@@ -16,6 +16,7 @@ global.bot_cfg = {
             5
         ]
     },
+    "heartbeat": 1800, //-1 disabled, > 0 seconds to give a log with proof of running
     "discordOptions": {
         "name": "<NAME_OF_BOT>",
         "token": "<TOKEN_APP>",
